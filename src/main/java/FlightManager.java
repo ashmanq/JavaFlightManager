@@ -4,11 +4,6 @@ import java.util.Collections;
 
 public class FlightManager {
 
-//    private String name;
-
-//    public FlightManager(String name) {
-//        this.name = name;
-//    }
 
     public static Passenger findPassengerBySeatNo(Flight flight, int seatNo) {
         // We first sort the passengers into order by seat number
@@ -46,12 +41,6 @@ public class FlightManager {
         }
         return binarySearch(newSearchArea, seatNo);
     }
-
-
-//    public String getName() {
-//        return this.name;
-//    }
-
 
 
     public static Double getMaxBagWeightPerPassenger(Flight flight) {
