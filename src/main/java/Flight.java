@@ -20,8 +20,8 @@ public class Flight {
         this.passengers = new ArrayList<Passenger>();
     }
 
-    public Plane getPlane() {
-        return plane;
+    public PlaneType getPlaneType() {
+        return plane.getPlaneType();
     }
 
     public String getFlightNo() {
@@ -40,6 +40,10 @@ public class Flight {
         return depTime;
     }
 
+    public ArrayList<Passenger> getPassengers() {
+        return this.passengers;
+    }
+
     public int getPassengerNo() {
         return this.passengers.size();
     }
@@ -54,4 +58,5 @@ public class Flight {
             this.passengers.add(passenger);
         }
     }
+
 }

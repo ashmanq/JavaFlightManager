@@ -22,6 +22,7 @@ public class Passenger {
         return this.name;
     }
 
+
 //    public void addBag(Bag bag){
 //        this.bags.add(bag);
 //    }
@@ -30,14 +31,14 @@ public class Passenger {
 //        return this.bags.size();
 //    }
 
-//    public double getTotalBaggageWeight() {
+    public double getTotalBagWeight() {
 //        Double totalWeight = 0.0;
 //
 //        for(Bag bag : this.bags) {
 //            totalWeight += bag.getWeight();
 //        }
-//
-//        return totalWeight;
-//    }
+
+        return this.bag.getWeight();
+    }
 
 }

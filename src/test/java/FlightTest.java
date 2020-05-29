@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 public class FlightTest {
@@ -36,6 +38,19 @@ public class FlightTest {
     @Test
     public void canGetDepTime(){
         assertEquals("08:00", flight1.getDepTime());
+    }
+
+    @Test
+    public void canGetDepPlane(){
+        assertEquals(PlaneType.BOEING747, flight1.getPlaneType());
+    }
+
+    @Test
+    public void canGetPassengers() {
+        flight1.bookPassenger(passenger1);
+        ArrayList<Passenger> passengers = new ArrayList<Passenger>();
+        passengers.add(passenger1);
+        assertEquals(true, passengers.equals(flight1.getPassengers()));
     }
 
     @Test
