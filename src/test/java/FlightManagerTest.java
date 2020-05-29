@@ -21,11 +21,11 @@ public class FlightManagerTest {
         passenger3 = new Passenger("Donald Trump");
         passenger4 = new Passenger("Mike Pence");
 
-        flightRep = new Flight(plane1,"AM001", "WDC","LAX","08:00");
+        flightRep = new Flight(plane1,"AM001", "WDC","LAX","2020-06-01T08:00:00");
         flightRep.bookPassenger(passenger3);
         flightRep.bookPassenger(passenger4);
 
-        flightDem = new Flight(plane1,"AM002", "LAX","WDC","10:00");
+        flightDem = new Flight(plane1,"AM002", "LAX","WDC","2020-06-01T10:00:00");
         flightDem.bookPassenger(passenger1);
         flightDem.bookPassenger(passenger2);
 

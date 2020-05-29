@@ -21,6 +21,30 @@ public class PassengerTest {
     }
 
     @Test
+    public void canGetSeatNo() {
+        assertEquals(null, passenger1.getSeatNo());
+    }
+
+    @Test
+    public void canGetFlightNo() {
+        assertEquals(null, passenger1.getFlightNo());
+    }
+
+    @Test
+    public void canSetSeatNo() {
+        passenger1.setSeatNo(1);
+        assertEquals(1, passenger1.getSeatNo().intValue());
+    }
+
+    @Test
+    public void canSetFlightNo() {
+        passenger1.setFlightNo("AM001");
+        assertEquals("AM001", passenger1.getFlightNo());
+    }
+
+
+
+    @Test
     public void canGetTotalBagWeight() {
         assertEquals(10.00, passenger1.getTotalBagWeight(), 0.01);
     }
