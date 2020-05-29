@@ -52,4 +52,29 @@ public class FlightManagerTest {
     public void canGetRemainingFlightBagWeightCapacity() {
         assertEquals(30.00, flightManager.getRemainingFlightBagWeightCapacity(flightDem), 0.01);
     }
+
+    @Test
+    public void canSortArrayList() {
+        Plane plane2 = new Plane(PlaneType.AIRBUSA380);
+        Flight flight5 = new Flight(plane2,"AM002", "LAX","WDC","2020-06-01T10:00:00");
+        flight5.bookPassenger(passenger1);
+        flight5.bookPassenger(passenger2);
+        flight5.bookPassenger(passenger3);
+        flight5.bookPassenger(passenger4);
+
+        flightManager.sortPassengersBySeatNo(flight5);
+
+        ArrayList<Integer> sortedResults = new ArrayList<>();
+        for(Passenger passenger : flight5.getPassengers()) {
+            sortedResults.add(passenger.getSeatNo());
+        }
+
+        boolean inOrder = true;
+        for(int i = 0; i < sortedResults.size()-1; i++) {
+            if(sortedResults.get(i) > sortedResults.get(i + 1)) {
+                inOrder = false;
+            }
+        }
+        assertEquals(true, inOrder);
+    }
 }
