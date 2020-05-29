@@ -1,22 +1,60 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class FlightManager {
 
-    private String name;
+//    private String name;
 
-    public FlightManager(String name) {
-        this.name = name;
+//    public FlightManager(String name) {
+//        this.name = name;
+//    }
+
+    public static Passenger findPassengerBySeatNo(Flight flight, int seatNo) {
+        // We first sort the passengers into order by seat number
+        sortPassengersBySeatNo(flight);
+
+        ArrayList<Passenger> passengers = flight.getPassengers();
+
+        Passenger result = binarySearch(passengers, seatNo);
+
+        return result;
+    }
+
+    private static Passenger binarySearch(ArrayList<Passenger> passengers, int seatNo) {
+        if(passengers.size() == 0) {
+            return null;
+        }
+
+        int midIndex = 0;
+        if(passengers.size() > 1) {
+            midIndex = (int) Math.ceil((double) passengers.size() / 2);
+        }
+
+        int midPoint = passengers.get(midIndex).getSeatNo();
+
+        if(seatNo == midPoint) {
+            return passengers.get(midIndex);
+        }
+
+        ArrayList<Passenger> newSearchArea;
+
+        if(seatNo < midPoint) {
+            newSearchArea = new ArrayList<>(passengers.subList(0, midIndex));
+        } else {
+            newSearchArea = new ArrayList<>(passengers.subList(midIndex + 1, passengers.size()));
+        }
+        return binarySearch(newSearchArea, seatNo);
     }
 
 
-    public String getName() {
-        return this.name;
-    }
+//    public String getName() {
+//        return this.name;
+//    }
 
 
 
-    public Double getMaxBagWeightPerPassenger(Flight flight) {
+    public static Double getMaxBagWeightPerPassenger(Flight flight) {
 
         // We calculate max baggage weight by getting the Total allowed weight, halving it and then dividing
         // that number by the total number of passengers allowed on the plane.
@@ -26,7 +64,7 @@ public class FlightManager {
         return maxBagWeight;
     }
 
-    public Double getTotalPassengerBagWeight(Flight flight) {
+    public static Double getTotalPassengerBagWeight(Flight flight) {
 
         Double totalBagWeight = 0.00;
 
@@ -38,15 +76,15 @@ public class FlightManager {
         return totalBagWeight;
     }
 
-    public Double getRemainingFlightBagWeightCapacity(Flight flight) {
+    public static Double getRemainingFlightBagWeightCapacity(Flight flight) {
 
         Double totalAllowedBagWeight = flight.getPlaneType().getTotalWeight()/2;
-        Double remainingBaggageCapacity = totalAllowedBagWeight - this.getTotalPassengerBagWeight(flight);
+        Double remainingBaggageCapacity = totalAllowedBagWeight - getTotalPassengerBagWeight(flight);
 
         return remainingBaggageCapacity;
     }
 
-    public void sortPassengersBySeatNo(Flight flight) {
+    public static void sortPassengersBySeatNo(Flight flight) {
 
         // Get Passengers from flight
         ArrayList<Passenger> passengers = flight.getPassengers();
@@ -70,35 +108,6 @@ public class FlightManager {
             }
         }
 
-
-
     }
 
-    public ArrayList<Integer> bubbleSort(ArrayList<Integer> unsortedList) {
-        // Create an unsorted list of Integers
-//        ArrayList<Integer> unsortedList = new ArrayList<>();
-//        unsortedList.add(2);
-//        unsortedList.add(5);
-//        unsortedList.add(1);
-//        unsortedList.add(4);
-//        unsortedList.add(3);
-
-        //Cycle through (array size - 1) values
-        for (int i = 0; i < unsortedList.size(); i++) {
-            for(int j = 0; j < unsortedList.size() - i - 1; j++) {
-
-                int firstVal = unsortedList.get(j);
-                int secondVal = unsortedList.get(j+1);
-
-                if(firstVal > secondVal) {
-                    Collections.swap(unsortedList, j, j+1);
-                }
-            }
-        }
-
-        ArrayList<Integer> sortedList = unsortedList;
-
-        return sortedList;
-
-    }
 }

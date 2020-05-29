@@ -4,10 +4,11 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FlightManagerTest {
 
-    private FlightManager flightManager;
+//    private FlightManager flightManager;
     private Plane plane1;
     private Passenger passenger1, passenger2, passenger3, passenger4;
     private Flight flightDem, flightRep;
@@ -29,28 +30,28 @@ public class FlightManagerTest {
         flightDem.bookPassenger(passenger1);
         flightDem.bookPassenger(passenger2);
 
-        flightManager = new FlightManager("TravelJava");
+//        flightManager = new FlightManager("TravelJava");
     }
 
-    @Test
-    public void canGetName() {
-        assertEquals("TravelJava", flightManager.getName());
-    }
+//    @Test
+//    public void canGetName() {
+//        assertEquals("TravelJava", FlightManager.getName());
+//    }
 
 
     @Test
     public void canCalcBaggageWeightPerCustomer() {
-        assertEquals(25.00, flightManager.getMaxBagWeightPerPassenger(flightRep), 0.01);
+        assertEquals(25.00, FlightManager.getMaxBagWeightPerPassenger(flightRep), 0.01);
     }
 
     @Test
     public void canGetTotalPassengerBaggageWeightForFlight() {
-        assertEquals(20.00, flightManager.getTotalPassengerBagWeight(flightDem), 0.01);
+        assertEquals(20.00, FlightManager.getTotalPassengerBagWeight(flightDem), 0.01);
     }
 
     @Test
     public void canGetRemainingFlightBagWeightCapacity() {
-        assertEquals(30.00, flightManager.getRemainingFlightBagWeightCapacity(flightDem), 0.01);
+        assertEquals(30.00, FlightManager.getRemainingFlightBagWeightCapacity(flightDem), 0.01);
     }
 
     @Test
@@ -62,7 +63,7 @@ public class FlightManagerTest {
         flight5.bookPassenger(passenger3);
         flight5.bookPassenger(passenger4);
 
-        flightManager.sortPassengersBySeatNo(flight5);
+        FlightManager.sortPassengersBySeatNo(flight5);
 
         ArrayList<Integer> sortedResults = new ArrayList<>();
         for(Passenger passenger : flight5.getPassengers()) {
@@ -75,6 +76,24 @@ public class FlightManagerTest {
                 inOrder = false;
             }
         }
-        assertEquals(true, inOrder);
+        assertTrue(inOrder);
+    }
+
+    @Test
+    public void canFindPassengerBySeatNo() {
+        Plane plane3 = new Plane(PlaneType.AIRBUSA380);
+        Flight flight6 = new Flight(plane3,"AM002", "LAX","WDC","2020-06-01T10:00:00");
+        flight6.bookPassenger(passenger1);
+        flight6.bookPassenger(passenger2);
+        flight6.bookPassenger(passenger3);
+        flight6.bookPassenger(passenger4);
+
+        //Seat numbers are allocated randomly to ensure expected test results
+        // allocate a specific seat number to passenger
+        int expectedSeatNo = passenger1.getSeatNo();
+
+        Passenger foundPassenger = FlightManager.findPassengerBySeatNo(flight6, expectedSeatNo);
+
+        assertEquals(expectedSeatNo, foundPassenger.getSeatNo().intValue());
     }
 }
