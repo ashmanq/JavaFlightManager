@@ -1,4 +1,4 @@
-# JavaFlightManager
+# Java Flight Manager
 
 A Java App that uses classes and enumerators to allow for booking of passengers on flights.
 
